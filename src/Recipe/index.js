@@ -16,6 +16,7 @@ const Recipe = () => {
   useEffect(() => {
     // console.log("effect from the react");
     getRequest();
+    // eslint-disable-next-line
   }, [query]);
 
   const getRequest = async () => {
@@ -38,30 +39,38 @@ const Recipe = () => {
   };
 
   return (
-    <div>
-      <h2>welcome Recipe</h2>
-      <form className="search-from" onSubmit={getSearch}>
-        <input
-          className="search-box"
-          type="text"
-          name="search"
-          value={search}
-          onChange={updateSearch}
-        />
-        <button className="search-button" type="submit">
-          search
-        </button>
-      </form>
+    <div className="flex flex-col gap-2 p-4">
+      <div className="flex flex-col  items-center sm:flex-row  gap-4 ">
+        <h2 className="text-2xl">Welcome Recipe</h2>
+        <form onSubmit={getSearch}>
+          <div className="flex ">
+            <input
+              className="search-box p-2 w-full rounded-lg"
+              type="text"
+              name="search"
+              value={search}
+              onChange={updateSearch}
+            />
+            <button className="bg-blue-500 py-2 px-3" type="submit">
+              search
+            </button>
+          </div>
+        </form>
+      </div>
+
       {/* <span onClick={() => setCount(counter + 1)}>{counter}</span> */}
-      {recipe.map((items) => {
-        return (
-          <ListRecipe
-            title={items.recipe.label}
-            ingredients={items.recipe.ingredients}
-            image={items.recipe.image}
-          />
-        );
-      })}
+
+      <div className="grid sm:grid-cols-3 gap-6">
+        {recipe.map((items) => {
+          return (
+            <ListRecipe
+              title={items.recipe.label}
+              ingredients={items.recipe.ingredients}
+              image={items.recipe.image}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
